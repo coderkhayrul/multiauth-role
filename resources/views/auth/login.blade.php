@@ -16,23 +16,23 @@
                     <div class="form-group icon_parent">
                         <label for="password">Email</label>
                         < <input placeholder="Email Address" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <span class="icon_soon_bottom_right"><i class="fas fa-envelope"></i></span>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <span class="icon_soon_bottom_right"><i class="fas fa-envelope"></i></span>
 
                     </div>
                     <div class="form-group icon_parent">
                         <label for="password">Password</label>
                         <input placeholder="Enter your password"id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                        <span class="icon_soon_bottom_right"><i class="fas fa-unlock"></i></span>
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <span class="icon_soon_bottom_right"><i class="fas fa-unlock"></i></span>
                     </div>
                     <div class="form-group">
                         <label class="chech_container">Remember me
