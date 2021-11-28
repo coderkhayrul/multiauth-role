@@ -1,6 +1,8 @@
 <?php
 
+
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,11 +22,19 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/change-password', [ChangePasswordController::class, 'index'])->name('password.change');
 Route::post('/change-password', [ChangePasswordController::class, 'update'])->name('password.change.update');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/////////// <-- ADMIN ROUTE LIST START --> ///////////
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+    Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+});
+/////////// <-- ADMIN ROUTE LIST END --> ///////////
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/////////// <-- AUTHOR ROUTE LIST START --> ///////////
+Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'author', 'middleware' => ['auth', 'author']], function () {
+    Route::get('dashboard', [App\Http\Controllers\Author\DashboardController::class, 'index'])->name('dashboard');
+});
+/////////// <-- AUTHOR ROUTE LIST END --> ///////////
